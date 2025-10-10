@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+/* Indian Army inspired colors and Minecraft feel */
+:root {
+    --army-green-dark: #3A4A3A;
+    --army-green-light: #6B8E23;
+    --khaki: #BDB76B;
+    --orange-flag: #FF9933;
+    --white-flag: #FFFFFF;
+    --navy-blue-ashoka: #000080;
+    --pixel-font: 'Press Start 2P', cursive;
+    --mono-font: 'VT323', monospace;
+}
+
+body {
+    margin: 0;
+    font-family: var(--mono-font);
+    background-color: #1a1a1a;
+    color: var(--white-flag);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('minecraft-army-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4) saturate(0.8) grayscale(0.2);
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.container {
+    background-color: rgba(30, 30, 30, 0.85);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(var(--orange-flag), 0.5), 0 0 15px rgba(var(--army-green-light), 0.7);
+    max-width: 900px;
+    width: 90%;
+    border: 3px solid var(--army-green-light);
+    position: relative;
+    z-index: 1;
+    image-rendering: pixelated;
+}
+
+.header .css-logo {
+    margin-bottom: 25px;
+    image-rendering: pixelated;
+    display: inline-block;
+}
+
+.logo-tag {
+    font-family: var(--mono-font);
+    color: var(--khaki);
+    font-size: 2.5em;
+    vertical-align: middle;
+}
+
+.logo-text {
+    font-family: var(--pixel-font);
+    color: var(--orange-flag);
+    font-size: 3.5em;
+    margin: 0 10px;
+    text-shadow: 2px 2px var(--navy-blue-ashoka);
+    letter-spacing: 2px;
+    vertical-align: middle;
+}
+
+.coming-soon-heading {
+    font-family: var(--pixel-font);
+    font-size: 4em;
+    color: var(--orange-flag);
+    text-shadow: 2px 2px var(--navy-blue-ashoka);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-family: var(--mono-font);
+    font-size: 1.5em;
+    color: var(--khaki);
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.footer {
+    border-top: 1px solid var(--army-green-dark);
+    padding-top: 20px;
+    color: var(--khaki);
+    font-size: 0.9em;
+    font-family: var(--mono-font);
+    margin-top: 50px;
+}
+
+.footer .social-links a {
+    color: var(--orange-flag);
+    text-decoration: none;
+    margin: 0 12px;
+    transition: color 0.3s ease;
+    font-family: var(--mono-font);
+}
+
+.footer .social-links a:hover {
+    color: var(--white-flag);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 2.5em;
+    }
+    .logo-tag {
+        font-size: 2em;
+    }
+    .coming-soon-heading {
+        font-size: 3em;
+    }
+    .tagline {
+        font-size: 1.2em;
+    }
+}
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 2em;
+    }
+    .logo-tag {
+        font-size: 1.5em;
+    }
+    .coming-soon-heading {
+        font-size: 2.5em;
+    }
+    .tagline {
+        font-size: 1em;
+    }
+    .container {
+        padding: 20px;
+    }
+}
