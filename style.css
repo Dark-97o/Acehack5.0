@@ -1,150 +1,225 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
-
-/* Indian Army inspired colors and Minecraft feel */
 :root {
-    --army-green-dark: #3A4A3A;
-    --army-green-light: #6B8E23;
-    --khaki: #BDB76B;
-    --orange-flag: #FF9933;
-    --white-flag: #FFFFFF;
-    --navy-blue-ashoka: #000080;
-    --pixel-font: 'Press Start 2P', cursive;
-    --mono-font: 'VT323', monospace;
+    --primary-color: #0d1a26;
+    --secondary-color: #1a2a3a;
+    --accent-color-1: #00bcd4; /* Cyan */
+    --accent-color-2: #800080; /* Purple */
+    --text-color: #f0f4f8;
+    --progress-bar-color: #00bcd4;
 }
 
 body {
     margin: 0;
-    font-family: var(--mono-font);
-    background-color: #1a1a1a;
-    color: var(--white-flag);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
     position: relative;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    background-color: var(--primary-color);
 }
 
-body::before {
-    content: '';
-    position: absolute;
+/* Particles.js background */
+#particles-js {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('minecraft-army-bg.jpg');
+    background-color: var(--primary-color);
+    background-image: url('');
     background-size: cover;
-    background-position: center;
-    filter: brightness(0.4) saturate(0.8) grayscale(0.2);
-    z-index: -1;
-    image-rendering: pixelated;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .container {
-    background-color: rgba(30, 30, 30, 0.85);
-    padding: 40px;
-    border-radius: 8px;
     text-align: center;
-    box-shadow: 0 0 25px rgba(var(--orange-flag), 0.5), 0 0 15px rgba(var(--army-green-light), 0.7);
-    max-width: 900px;
-    width: 90%;
-    border: 3px solid var(--army-green-light);
-    position: relative;
-    z-index: 1;
-    image-rendering: pixelated;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 60px 80px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1.5s ease-in-out;
 }
 
-.header .css-logo {
-    margin-bottom: 25px;
-    image-rendering: pixelated;
-    display: inline-block;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Logo and Text */
+.logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-color-1);
+    text-shadow: 0 0 15px rgba(0, 188, 212, 0.8);
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .logo-tag {
-    font-family: var(--mono-font);
-    color: var(--khaki);
-    font-size: 2.5em;
-    vertical-align: middle;
+    color: var(--accent-color-2);
 }
 
-.logo-text {
-    font-family: var(--pixel-font);
-    color: var(--orange-flag);
-    font-size: 3.5em;
-    margin: 0 10px;
-    text-shadow: 2px 2px var(--navy-blue-ashoka);
-    letter-spacing: 2px;
-    vertical-align: middle;
+.main-heading {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGradient 3s ease infinite;
 }
 
-.coming-soon-heading {
-    font-family: var(--pixel-font);
-    font-size: 4em;
-    color: var(--orange-flag);
-    text-shadow: 2px 2px var(--navy-blue-ashoka);
-    margin-bottom: 20px;
-    letter-spacing: 2px;
+@keyframes textGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .tagline {
-    font-family: var(--mono-font);
-    font-size: 1.5em;
-    color: var(--khaki);
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #b0b8c4;
     margin-bottom: 40px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    animation: slideIn 1s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 80%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--accent-color-1), var(--accent-color-2));
+    animation: loading 3s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 0; }
+}
+
+/* Dynamic Message */
+.message-container {
+    height: 25px;
+    margin-top: 20px;
+}
+
+.message-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--accent-color-1);
+    animation: text-animation 12s infinite;
+    animation-delay: 2s;
+    opacity: 0;
+}
+
+/* Footer and Social Links */
 .footer {
-    border-top: 1px solid var(--army-green-dark);
-    padding-top: 20px;
-    color: var(--khaki);
-    font-size: 0.9em;
-    font-family: var(--mono-font);
-    margin-top: 50px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    z-index: 1;
+}
+
+.footer .social-links {
+    margin-top: 10px;
 }
 
 .footer .social-links a {
-    color: var(--orange-flag);
-    text-decoration: none;
-    margin: 0 12px;
+    color: inherit;
+    margin: 0 15px;
     transition: color 0.3s ease;
-    font-family: var(--mono-font);
 }
 
 .footer .social-links a:hover {
-    color: var(--white-flag);
+    color: var(--accent-color-1);
+}
+
+.footer .social-links svg {
+    stroke-width: 1.5;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .logo-text {
-        font-size: 2.5em;
-    }
-    .logo-tag {
-        font-size: 2em;
-    }
-    .coming-soon-heading {
-        font-size: 3em;
-    }
-    .tagline {
-        font-size: 1.2em;
-    }
-}
-@media (max-width: 480px) {
-    .logo-text {
-        font-size: 2em;
-    }
-    .logo-tag {
-        font-size: 1.5em;
-    }
-    .coming-soon-heading {
-        font-size: 2.5em;
-    }
-    .tagline {
-        font-size: 1em;
-    }
     .container {
-        padding: 20px;
+        padding: 40px 20px;
+    }
+    .logo-text {
+        font-size: 2rem;
+    }
+    .main-heading {
+        font-size: 3rem;
+    }
+    .tagline {
+        font-size: 1rem;
     }
 }
