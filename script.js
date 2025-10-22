@@ -1,133 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // Initialize Particles.js
-    particlesJS('particles-js', {
-        "particles": {
-            "number": {
-                "value": 80,
-                "density": {
-                    "enable": true,
-                    "value_area": 800
-                }
-            },
-            "color": {
-                "value": ["#00bcd4", "#800080", "#ffffff"]
-            },
-            "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#ffffff"
-                },
-                "polygon": {
-                    "nb_sides": 5
-                }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": false,
-                "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
-            },
-            "size": {
-                "value": 3,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 2,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
-            }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "repulse"
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push"
-                },
-                "resize": true
-            },
-            "modes": {
-                "grab": {
-                    "distance": 400,
-                    "line_linked": {
-                        "opacity": 1
-                    }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
-            }
-        },
-        "retina_detect": true
-    });
-
-    // Dynamic message array for the message container
-    const messages = [
-        "Deploying resources...",
-        "Calibrating systems...",
-        "Gathering intel...",
-        "Final preparations underway...",
-        "Get ready to innovate."
+    const statusLine = document.getElementById('status-line');
+    const bootSequence = document.getElementById('boot-sequence');
+    const mainContent = document.getElementById('main-content');
+    
+    const bootMessages = [
+        "EXECUTING DEPLOYMENT PROTOCOL v5.0",
+        "VERIFYING SECURITY CREDENTIALS... [OK]",
+        "ALLOCATING 64MB HEAP FOR COMMAND CORE",
+        "LOADING MAP ASSETS: 'PIXEL-BATTLEFIELD'...",
+        "COMPILING TACTICAL DATA...",
+        "STATUS: BOOT COMPLETE. AWAITING USER COMMAND."
     ];
 
     let messageIndex = 0;
-    const messageElement = document.getElementById('message-text');
+    let charIndex = 0;
+    const typingSpeed = 10; // Very fast typing speed
+    const lineDelay = 300;  // Minimal delay between lines
 
-    function updateMessage() {
-        messageElement.style.animation = 'none';
-        messageElement.offsetHeight; // Trigger a reflow to restart animation
-        messageElement.style.animation = null;
-
-        messageElement.textContent = messages[messageIndex];
-        messageIndex = (messageIndex + 1) % messages.length;
+    function typeMessage() {
+        if (messageIndex < bootMessages.length) {
+            const currentMessage = bootMessages[messageIndex];
+            
+            if (charIndex < currentMessage.length) {
+                statusLine.textContent += currentMessage.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeMessage, typingSpeed);
+            } else {
+                messageIndex++;
+                charIndex = 0;
+                statusLine.textContent += '\n'; 
+                if (messageIndex < bootMessages.length) {
+                    statusLine.style.animation = 'status-flicker 0.1s step-end 3 alternate';
+                    setTimeout(() => {
+                        statusLine.style.animation = 'none';
+                        typeMessage();
+                    }, lineDelay);
+                } else {
+                    // Final reveal is now very quick
+                    setTimeout(showMainContent, 300); 
+                }
+            }
+        }
     }
 
-    setInterval(updateMessage, 3000); // Change message every 3 seconds
+    function showMainContent() {
+        bootSequence.style.opacity = '0';
+        
+        setTimeout(() => {
+            bootSequence.style.display = 'none';
+            mainContent.style.opacity = '1';
+        }, 500); // Quick fade time
+    }
 
+    // Start the whole sequence immediately
+    setTimeout(typeMessage, 100); 
 });
