@@ -1,108 +1,114 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
 
-        :root {
-            --army-green-dark: #2d4a2b;
-            --army-green-light: #6B8E23;
-            --khaki: #BDB76B;
-            --orange-flag: #FF9933;
-            --white-flag: #FFFFFF;
-            --navy-blue-ashoka: #000080;
-            --pixel-font: 'Press Start 2P', cursive;
-            --mono-font: 'VT323', monospace;
-            --terminal-green: #00ff00;
-            --terminal-shadow: rgba(0, 255, 0, 0.4);
-            --boot-bg: #0d0d0d;
-            --shadoww: #cfcfcf;
-        }
+:root {
+    --army-green-dark: #2d4a2b;
+    --army-green-light: #6B8E23;
+    --khaki: #BDB76B;
+    --orange-flag: #FF9933;
+    --white-flag: #FFFFFF;
+    --navy-blue-ashoka: #000080;
+    --pixel-font: 'Press Start 2P', cursive;
+    --mono-font: 'VT323', monospace;
+    --terminal-green: #00ff00;
+    --terminal-shadow: rgba(0, 255, 0, 0.4);
+    --boot-bg: #0d0d0d;
+    --shadoww: #cfcfcf;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: var(--mono-font);
-            background: #1a1a1a;
-            color: var(--white-flag);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            image-rendering: pixelated;
-        }
+body {
+    font-family: var(--mono-font);
+    background: #1a1a1a;
+    color: var(--white-flag);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    image-rendering: pixelated;
+}
 
-        /* 3D Background */
-        #scene-3d {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            opacity: 0.4;
-        }
 
-        /* Mouse Trail Canvas */
-        #trail-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9998;
-            pointer-events: none;
-        }
 
-        /* Hexagonal Grid Overlay with subtle Minecraft/Indian Army elements */
-        .hex-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background-image: 
-                linear-gradient(30deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%),
-                linear-gradient(150deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%),
-                linear-gradient(270deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%);
-            background-size: 80px 140px;
-            animation: hex-drift 20s linear infinite;
-        }
+@keyframes bg-pulse {
+    0%, 100% { transform: scale(1.05); opacity: 0.22; }
+    50% { transform: scale(1.08); opacity: 0.28; }
+}
 
-        @keyframes hex-drift {
-            0% { background-position: 0 0; }
-            100% { background-position: 80px 140px; }
-        }
+/* 3D Background */
+#scene-3d {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0.4;
+}
 
-        /* Subtle Scanline Effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.08),
-                rgba(0, 0, 0, 0.08) 1px,
-                transparent 1px,
-                transparent 3px
-            );
-            pointer-events: none;
-            z-index: 9999;
-            animation: scanline 10s linear infinite;
-        }
+/* Mouse Trail Canvas */
+#trail-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    pointer-events: none;
+}
 
-        @keyframes scanline {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100%); }
-        }
+/* Hexagonal Grid Overlay */
+.hex-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+    background-image: 
+        linear-gradient(30deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%),
+        linear-gradient(150deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%),
+        linear-gradient(270deg, transparent 48%, var(--army-green-light) 49%, var(--army-green-light) 51%, transparent 52%);
+    background-size: 80px 140px;
+    animation: hex-drift 20s linear infinite;
+}
 
+@keyframes hex-drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 80px 140px; }
+}
+
+/* Subtle Scanline Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.08),
+        rgba(0, 0, 0, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
         /* Boot Sequence */
         #boot-sequence {
             position: fixed;

@@ -9,16 +9,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Abstract Military-Minecraft Background Image -->
+<div id="bg-image"></div>
     <!-- ====================== BACKGROUND MUSIC ====================== -->
   <!-- Reliable test audio sources (SoundHelix + MDN sample) -->
-<audio id="bg-music" autoplay muted loop preload="auto" crossorigin="anonymous">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+<audio id="bg-music" autoplay muted loop preload="auto">
+    <source src="assets/bg_music/music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
 </audio>
-
-
-
-
-
 
 
     <div id="music-toggle" title="Toggle background music">
@@ -116,45 +115,45 @@
 
     <!-- Background-music controller -->
      <script>
-    (function(){
-      const audio  = document.getElementById('bg-music');
-      const toggle = document.getElementById('music-toggle');
+        (function(){
+        const audio  = document.getElementById('bg-music');
+        const toggle = document.getElementById('music-toggle');
 
-      // Ensure autoplay attempt (muted) — required by many browsers
-      audio.volume = 0;
-      audio.muted = true;
-      audio.play().catch((e)=>{ /* autoplay blocked until interaction — expected */ });
+        // Start muted for autoplay policy
+        audio.volume = 0.16;
+        audio.muted = false;
+        audio.play().catch(()=>{});
 
-      // Fade in after first user interaction
-      function unlock(){
-        try {
-          audio.muted = false;
-          const targetVol = 0.22;
-          const step = 0.02;
-          let fade = setInterval(() => {
-            if (audio.volume < targetVol) audio.volume = Math.min(audio.volume + step, targetVol);
-            else clearInterval(fade);
-          }, 100);
-        } catch(e){
-          console.warn('Could not unmute audio:', e);
+        // Fade in after first user click/touch
+        function unlock(){
+            audio.muted = false;
+            let targetVol = 0.2;
+            let step = 0.02;
+            let fade = setInterval(() => {
+                if (audio.volume < targetVol)
+                    audio.volume = Math.min(audio.volume + step, targetVol);
+                else clearInterval(fade);
+            }, 100);
+
+            document.removeEventListener('click', unlock);
+            document.removeEventListener('touchstart', unlock);
         }
-        document.removeEventListener('click', unlock, true);
-        document.removeEventListener('touchstart', unlock, true);
-      }
-      document.addEventListener('click', unlock, true);
-      document.addEventListener('touchstart', unlock, true);
 
-      // Toggle button
-      toggle.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play().catch(()=>{});
-          toggle.classList.remove('muted');
-        } else {
-          audio.pause();
-          toggle.classList.add('muted');
-        }
-      });
+        document.addEventListener('click', unlock);
+        document.addEventListener('touchstart', unlock);
+
+        // Toggle button
+        toggle.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                toggle.classList.remove('muted');
+            } else {
+                audio.pause();
+                toggle.classList.add('muted');
+            }
+        });
     })();
+
   </script>
 </body>
 </html>

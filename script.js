@@ -124,6 +124,7 @@
             trailParticles.push({ x: mouseX, y: mouseY, life: 1 });
         });
 
+
         function animateTrail() {
             trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
             trailParticles.forEach((p, i) => {
